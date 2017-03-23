@@ -1,0 +1,5 @@
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\bin\Release\SampleApp5.exe
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\bin\Release\SampleApp5.pdb
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\obj\Release\SampleApp5.exe
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\obj\Release\SampleApp5.pdb
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\obj\Release\SampleApp5.csprojResolveAssemblyReference.cache

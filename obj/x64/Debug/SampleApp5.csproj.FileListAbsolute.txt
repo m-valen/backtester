@@ -1,0 +1,190 @@
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\bin\x64\Debug\SampleApp5.exe
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\bin\x64\Debug\SampleApp5.pdb
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\obj\x64\Debug\SampleApp5.exe
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\obj\x64\Debug\SampleApp5.pdb
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\obj\x64\Debug\SampleApp5.Form1.resources
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\bin\x64\Debug\Newtonsoft.Json.dll
+C:\NxCoreData\NxD_ManifoldCapital\NxCoreLanguages\C#\SampleApp5\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\Manifold\Desktop\SampleApp5\bin\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\SampleApp5\bin\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\SampleApp5\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\Manifold\Desktop\SampleApp5\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\Manifold\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\Manifold\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\Manifold\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\Manifold\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.pdb
+C:\Users\valen\Desktop\SampleApp5\bin\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\SampleApp5\bin\x64\Debug\SampleApp5.pdb
+C:\Users\valen\Desktop\SampleApp5\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\valen\Desktop\SampleApp5\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\valen\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\valen\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\valen\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\valen\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.pdb
+C:\Users\valen\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.DataManagement.resources
+C:\Users\valen\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.ProgressWindow.resources
+C:\Users\valen\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.ImportTicks.resources
+C:\Users\valen\Desktop\SampleApp5\obj\x64\Debug\SampleApp5.GenerateCandles.resources
+C:\Users\Manifold\Desktop\backtesterMar8\bin\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\backtesterMar8\bin\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\backtesterMar8\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\Manifold\Desktop\backtesterMar8\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\Manifold\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\Manifold\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.DataManagement.resources
+C:\Users\Manifold\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\Manifold\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.GenerateCandles.resources
+C:\Users\Manifold\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.ImportTicks.resources
+C:\Users\Manifold\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.ProgressWindow.resources
+C:\Users\Manifold\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\Manifold\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.pdb
+C:\Users\valen\Desktop\backtesterMar8\bin\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\backtesterMar8\bin\x64\Debug\SampleApp5.pdb
+C:\Users\valen\Desktop\backtesterMar8\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\valen\Desktop\backtesterMar8\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.BacktestForm.resources
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.DataManagement.resources
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.GenerateCandles.resources
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.ImportTicks.resources
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.ProgressWindow.resources
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\backtesterMar8\obj\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\backtesterMar9\bin\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\backtesterMar9\bin\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\backtesterMar9\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\Manifold\Desktop\backtesterMar9\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.BacktestForm.resources
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.DataManagement.resources
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.GenerateCandles.resources
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.ImportTicks.resources
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.ProgressWindow.resources
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\backtesterMar9\obj\x64\Debug\SampleApp5.TestResultForm.resources
+C:\Users\valen\Desktop\backtesterMar9Aft\bin\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\backtesterMar9Aft\bin\x64\Debug\SampleApp5.pdb
+C:\Users\valen\Desktop\backtesterMar9Aft\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\valen\Desktop\backtesterMar9Aft\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.BacktestForm.resources
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.DataManagement.resources
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.GenerateCandles.resources
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.ImportTicks.resources
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.ProgressWindow.resources
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.TestResultForm.resources
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\backtesterMar9Aft\obj\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.BacktestForm.resources
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.DataManagement.resources
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.GenerateCandles.resources
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.ImportTicks.resources
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.ProgressWindow.resources
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.TestResultForm.resources
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\backtesterMar10\obj\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\Microsoft.Office.Interop.Excel.dll
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\OfficeApi.dll
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\VBIDEApi.dll
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\NetOffice.dll
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\stdole.dll
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\OfficeApi.xml
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\VBIDEApi.xml
+C:\Users\Manifold\Desktop\backtesterMar10\bin\x64\Debug\NetOffice.xml
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\SampleApp5.pdb
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\Microsoft.Office.Interop.Excel.dll
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\OfficeApi.dll
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\VBIDEApi.dll
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\NetOffice.dll
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\stdole.dll
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\OfficeApi.xml
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\VBIDEApi.xml
+C:\Users\valen\Desktop\backtester Mar12\bin\x64\Debug\NetOffice.xml
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.BacktestForm.resources
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.DataManagement.resources
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.GenerateCandles.resources
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.ImportTicks.resources
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.ProgressWindow.resources
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.TestResultForm.resources
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.pdb
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.OptimizerForm.resources
+C:\Users\valen\Desktop\backtester Mar12\obj\x64\Debug\SampleApp5.OptimizeResultsForm.resources
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\Microsoft.Office.Interop.Excel.dll
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\OfficeApi.dll
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\VBIDEApi.dll
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\NetOffice.dll
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\stdole.dll
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\OfficeApi.xml
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\VBIDEApi.xml
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\NetOffice.xml
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.BacktestForm.resources
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.DataManagement.resources
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.GenerateCandles.resources
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.ImportTicks.resources
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.OptimizeResultsForm.resources
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.OptimizerForm.resources
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.ProgressWindow.resources
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.TestResultForm.resources
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.exe
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.pdb
+C:\Users\Manifold\Desktop\backtesterMar13\obj\x64\Debug\SampleApp5.CurrDirectoryChooser.resources
+C:\Users\Manifold\Desktop\backtesterMar13\bin\x64\Debug\SampleApp5.exe.config
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\SampleApp5.exe.config
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\SampleApp5.pdb
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\Microsoft.Office.Interop.Excel.dll
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\OfficeApi.dll
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\VBIDEApi.dll
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\NetOffice.dll
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\stdole.dll
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\OfficeApi.xml
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\VBIDEApi.xml
+C:\Users\valen\Desktop\backtesterMar13Aft\bin\x64\Debug\NetOffice.xml
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.csprojResolveAssemblyReference.cache
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.BacktestForm.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.CurrDirectoryChooser.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.DataManagement.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.Form1.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.GenerateCandles.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.ImportTicks.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.OptimizeResultsForm.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.OptimizerForm.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.ProgressWindow.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.TestResultForm.resources
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.csproj.GenerateResource.Cache
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.exe
+C:\Users\valen\Desktop\backtesterMar13Aft\obj\x64\Debug\SampleApp5.pdb
