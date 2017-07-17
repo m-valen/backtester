@@ -28,7 +28,7 @@ namespace Backtester
                     var values = line.Split(',');
                     if (!(count == 0))
                     {
-                        ticks.Add(new List<String> { values[0], (values[1]), values[2], values[3] }); //MsOfDay, Time, Price, Size   4:14:10.285, 62.27, 200 
+                        ticks.Add(new List<String> { values[0], (values[1]), values[2], values[3], values[4] }); //MsOfDay, Time, Price, Size, Trade Condition   4:14:10.285, 62.27, 200 
                     }
                     count = 1;
                 }

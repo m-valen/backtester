@@ -51,6 +51,8 @@ namespace Backtester
         public DateTime endDate;
 
         public int numSymbols = 0;
+        public string hardStopType;
+        public string hardStopValue;
 
         public bool processCancelled = false;
         public bool closePending = false;
@@ -163,6 +165,12 @@ namespace Backtester
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (radioButton1.Checked) hardStopType = "PL";
+            else hardStopType = "IncrementSteps";
+
+            if (hardStopType == "PL") hardStopValue = numericUpDown4.Value.ToString();
+            else hardStopValue = numericUpDown5.Value.ToString();
+
             List<string> symbolParams = new List<string>();
             symbolParams.Add(textBox3.Text.ToUpper());   //Symbol
             symbolParams.Add(dateTimePicker6.Value.ToString("h:mm:ss:ff:tt"));
@@ -170,7 +178,8 @@ namespace Backtester
             symbolParams.Add(numericUpDown1.Value.ToString());
             symbolParams.Add(numericUpDown2.Value.ToString());
             symbolParams.Add(numericUpDown3.Value.ToString());
-            symbolParams.Add(numericUpDown4.Value.ToString());
+            symbolParams.Add(hardStopType);
+            symbolParams.Add(hardStopValue);
 
             List<DateTime> symbolDates = new List<DateTime>();
             List<string> symbolExcludeDates = new List<string>();
@@ -368,6 +377,30 @@ namespace Backtester
                 e.Cancel = true;
                 this.Enabled = false;   // or this.Hide()
                 return;
+            }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                numericUpDown4.Enabled = true;
+            }
+            else
+            {
+                numericUpDown4.Enabled = false;
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked)
+            {
+                numericUpDown5.Enabled = true;
+            }
+            else
+            {
+                numericUpDown5.Enabled = false;
             }
         }
     }

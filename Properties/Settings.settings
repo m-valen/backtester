@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="WorkingDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\Manifold\Desktop\backtester-1.3</Value>
+      <Value Profile="(Default)">C:\Users\Manifold\Desktop\backtesterMar7</Value>
     </Setting>
   </Settings>
 </SettingsFile>

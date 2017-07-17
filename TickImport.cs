@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.IO;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 // Use the NxCoreAPI namespace
 using NxCoreAPI;
@@ -302,8 +303,48 @@ namespace Backtester
 
                 //Check that price is not tradethruexempt in the extended trade conditions - for future imports
                 //int tradeCondition = pNxCoreMsg->coreData.Trade.ExtTradeConditions[]
-                //
-                //var extendedTradeCondition = pNxCoreMsg->coreData.Trade.ExtTradeConditions[x];
+
+                var tradeCondition = pNxCoreMsg->coreData.Trade.TradeCondition;
+                byte* extendedTradeConditions = pNxCoreMsg->coreData.Trade.ExtTradeConditions;
+                
+
+                int len = 0;
+
+                for (int i = 0; i < 10; i++)
+                {
+                    try
+                    {
+                        string aaa = extendedTradeConditions[i].ToString();
+                        if (aaa == "255") break;
+                        len++;
+                    }
+                    catch (Exception)
+                    {
+                        break;
+                    }
+                }
+
+                byte[] _extendedTradeConditions = new byte[len];
+                Marshal.Copy((IntPtr)extendedTradeConditions, _extendedTradeConditions, 0, len);
+
+
+                Debug.WriteLine(tradeCondition);
+
+                foreach(int condition in _extendedTradeConditions)
+                {
+                    Debug.WriteLine(condition);
+                }
+                Debug.WriteLine("");
+                Debug.WriteLine("------------------------");
+                Debug.WriteLine("");
+
+                //string extCondition = extendedTradeConditions[0].ToString();
+
+                
+
+                //Debug.WriteLine(extCondition);
+
+                int a = 1;
 
                 /*if (tradeCondition == 108) //TradeThruExempt
                 {
@@ -316,8 +357,34 @@ namespace Backtester
                                   Price, bestBidPrice, bestAskPrice, tradeCondition);
                 }*/
 
-                var newLine = string.Format("{0},{1},{2},{3}", MsOfDay, TimeOfTrade, Price, Volume);
+                if (len == 0) { 
+
+                var newLine = string.Format("{0},{1},{2},{3},{4}", MsOfDay, TimeOfTrade, Price, Volume, tradeCondition.ToString());
                 csvs[Symbol.Remove(0, 1)] += newLine + "\n";
+                }
+
+                if (len == 1)
+                {
+
+                    var newLine = string.Format("{0},{1},{2},{3},{4},{5}", MsOfDay, TimeOfTrade, Price, Volume, tradeCondition.ToString(), _extendedTradeConditions[0].ToString());
+                    csvs[Symbol.Remove(0, 1)] += newLine + "\n";
+                }
+
+                if (len == 2)
+                {
+
+                    var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6}", MsOfDay, TimeOfTrade, Price, Volume, tradeCondition.ToString(), _extendedTradeConditions[0].ToString(),
+                        _extendedTradeConditions[1].ToString());
+                    csvs[Symbol.Remove(0, 1)] += newLine + "\n";
+                }
+
+                if (len == 3)
+                {
+
+                    var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7}", MsOfDay, TimeOfTrade, Price, Volume, tradeCondition.ToString(), _extendedTradeConditions[0].ToString(),
+                        _extendedTradeConditions[1].ToString(),_extendedTradeConditions[2].ToString());
+                    csvs[Symbol.Remove(0, 1)] += newLine + "\n";
+                }
 
                 // Write out Symbol, Time, Price, NetChg, Size, Reporting Exg
                 /*Console.WriteLine("Trade for Symbol: {0:S}, Time: {1:d}:{2:d}:{3:d}  Price: {4:f}  NetChg: {5:f}  Size: {6:d}  Exchg: {7:d} ",

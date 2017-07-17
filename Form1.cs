@@ -120,10 +120,10 @@ namespace Backtester
                 decimal ratio = 999999999999999;
                 foreach (string date in dates)
                 {
-                    decimal tradingRange = TechnicalAnalysis.TradingRange(symbol, date, DataHelper.GetMsOfDay("9:35:00:0:AM"), DataHelper.GetMsOfDay("4:00:00:0:PM"));
-                    dailyRanges.Add(tradingRange);
+                    //decimal tradingRange = TechnicalAnalysis.TradingRange(symbol, date, DataHelper.GetMsOfDay("9:35:00:0:AM"), DataHelper.GetMsOfDay("4:00:00:0:PM"));
+                    //dailyRanges.Add(tradingRange);
 
-                    Console.WriteLine(date + " - " + tradingRange.ToString());
+                    //Console.WriteLine(date + " - " + tradingRange.ToString());
                     //Find average true range of candles
                     candles = FileHelper.getCandles(symbol, date, 1);
 
@@ -176,6 +176,12 @@ namespace Backtester
         private void Form1_Load(object sender, EventArgs e)
         {
             Directory.SetCurrentDirectory(Properties.Settings.Default.WorkingDirectory);
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            RangeFinderForm rff = new Backtester.RangeFinderForm();
+            rff.Show();
         }
     }
 }

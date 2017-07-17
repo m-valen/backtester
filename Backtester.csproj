@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -167,6 +168,7 @@
       <DependentUpon>GenerateCandles.cs</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
+    <Compile Include="GradientLevels.cs" />
     <Compile Include="ImportTicks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,8 +201,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Backtester.cs" />
+    <Compile Include="RangeFinderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RangeFinderForm.Designer.cs">
+      <DependentUpon>RangeFinderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SingleRangeResult.cs" />
     <Compile Include="SingleResult.cs" />
     <Compile Include="StockVider.cs" />
+    <Compile Include="SymbolRangeResult.cs" />
     <Compile Include="SymbolResult.cs" />
     <Compile Include="TechnicalAnalysis.cs" />
     <Compile Include="TestResult.cs" />
@@ -246,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProgressWindow.resx">
       <DependentUpon>ProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RangeFinderForm.resx">
+      <DependentUpon>RangeFinderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestResultForm.resx">
       <DependentUpon>TestResultForm.cs</DependentUpon>

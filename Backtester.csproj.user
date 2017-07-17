@@ -24,7 +24,7 @@
     <StartArguments>20170106.GS.nx2</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <StartWorkingDirectory>C:\Users\Manifold\Desktop\NxData</StartWorkingDirectory>
+    <StartWorkingDirectory>C:\Users\Manifold\Desktop\backtesterMar7</StartWorkingDirectory>
     <StartArguments>20170106.GS.nx2</StartArguments>
   </PropertyGroup>
 </Project>

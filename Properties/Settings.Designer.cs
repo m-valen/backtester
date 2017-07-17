@@ -25,7 +25,7 @@ namespace Backtester.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Manifold\\Desktop\\backtester-1.3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Manifold\\Desktop\\backtesterMar7")]
         public string WorkingDirectory {
             get {
                 return ((string)(this["WorkingDirectory"]));

@@ -37,9 +37,11 @@ namespace Backtester
 
         public bool processCancelled = false;
         public bool closePending = false;
-
+        public bool multiTest = false;
 
         public int numScenarios = 0;
+
+        public List<string> displayGroups = new List<string>();
 
         public OptimizerForm()
         {
@@ -217,6 +219,24 @@ namespace Backtester
                 optimizeShow.Add("ProfitMargin", Convert.ToInt32(numericUpDown14.Value));
             }
 
+            //Get Display Groups
+            if (checkBox1.Checked)
+            {
+                displayGroups.Add("PL");
+            }
+            if (checkBox2.Checked)
+            {
+                displayGroups.Add("Range");
+            }
+            if (checkBox3.Checked)
+            {
+                displayGroups.Add("Fills");
+            }
+            if (checkBox4.Checked)
+            {
+                displayGroups.Add("Position-BP");
+            }
+
             //Get test dates
             List<DateTime> _symbolTestDates = DataHelper.GetTradingDays(dateTimePicker1.Value, dateTimePicker2.Value);
             List<string> _testDates = new List<string>();
@@ -289,6 +309,14 @@ namespace Backtester
 
             testResult = backtest.Run();
 
+            if (multiTest)
+            {
+                Backtest secondPassBacktest = new Backtest(testResult, backtestSymbolDates, sender as BackgroundWorker);
+                testResult = secondPassBacktest.Run();
+            }
+
+            
+
             e.Result = testResult;
         }
 
@@ -352,6 +380,11 @@ namespace Backtester
                     sw.Write("<totalPLRadioButton>" + radioButton1.Checked + "</totalPLRadioButton>");
                     sw.Write("<showCount>" + numericUpDown14.Value + "</showCount>");
                     sw.Write("<profitMarginRadioButton>" + radioButton2.Checked + "</profitMarginRadioButton>");
+                    sw.Write("<displayPositionCheckBox>" + checkBox4.Checked + "</displayPositionCheckBox>");
+                    sw.Write("<displayPLCheckBox>" + checkBox1.Checked + "</displayPLCheckBox>");
+                    sw.Write("<displayRangeCheckBox>" + checkBox2.Checked + "</displayRangeCheckBox>");
+                    sw.Write("<displayFillsCheckBox>" + checkBox3.Checked + "</displayFillsCheckBox>");
+                    sw.Write("<displayAvgWinCheckBox>" + checkBox5.Checked + "</displayAvgWinCheckBox>");
                     sw.WriteLine("</formData>");
                 }
 
@@ -411,6 +444,20 @@ namespace Backtester
                 string profitMarginCheckBox = xmlDoc.SelectSingleNode("//profitMarginRadioButton").InnerText;
                 radioButton2.Checked = Convert.ToBoolean(profitMarginCheckBox);
 
+                string displayPositionCheckBox = xmlDoc.SelectSingleNode("//displayPositionCheckBox").InnerText;
+                checkBox4.Checked = Convert.ToBoolean(displayPositionCheckBox);
+
+                string displayPLCheckBox = xmlDoc.SelectSingleNode("//displayPLCheckBox").InnerText;
+                checkBox1.Checked = Convert.ToBoolean(displayPLCheckBox);
+
+                string displayRangeCheckBox = xmlDoc.SelectSingleNode("//displayRangeCheckBox").InnerText;
+                checkBox2.Checked = Convert.ToBoolean(displayRangeCheckBox);
+
+                string displayFillsCheckBox = xmlDoc.SelectSingleNode("//displayFillsCheckBox").InnerText;
+                checkBox3.Checked = Convert.ToBoolean(displayFillsCheckBox);
+
+                string displayAvgWinCheckBox = xmlDoc.SelectSingleNode("//displayAvgWinCheckBox").InnerText;
+                checkBox5.Checked = Convert.ToBoolean(displayAvgWinCheckBox);
             }
             else { return; }
         }
@@ -423,7 +470,7 @@ namespace Backtester
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             orf = new OptimizeResultsForm();
-            orf.PrepareReport(testResult, optimizeShow, sender as BackgroundWorker);
+            orf.PrepareReport(testResult, optimizeShow, displayGroups, sender as BackgroundWorker);
            
         }
 
@@ -473,6 +520,125 @@ namespace Backtester
                 return;
             }
             base.OnFormClosing(e);
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            multiTest = true;
+            backtestSymbolDates.Clear();
+            backtestSymbolParams.Clear();
+            optimizeShow.Clear();
+
+            startDate = dateTimePicker1.Value;
+            endDate = dateTimePicker2.Value;
+
+            //Get OptimizeShow values
+            optimizeShow.Add("VarianceNormalized", 100000);
+
+
+
+            //Get Display Groups
+            if (checkBox1.Checked)
+            {
+                displayGroups.Add("PL");
+            }
+            if (checkBox2.Checked)
+            {
+                displayGroups.Add("Range");
+            }
+            if (checkBox3.Checked)
+            {
+                displayGroups.Add("Fills");
+            }
+            if (checkBox4.Checked)
+            {
+                displayGroups.Add("Position-BP");
+            }
+            if (checkBox5.Checked)
+            {
+                displayGroups.Add("AvgWin-Analysis");
+            }
+
+            //Get test dates
+            List<DateTime> _symbolTestDates = DataHelper.GetTradingDays(dateTimePicker1.Value, dateTimePicker2.Value);
+            List<string> _testDates = new List<string>();
+
+            foreach (DateTime d in _symbolTestDates)
+            {
+                _testDates.Add(d.ToString("yyyyMMdd"));
+            }
+
+
+            //Get exclude dates
+            string globalExcludeDatesText = textBox1.Text.Replace("-", "");
+            string[] globalExcludeDates = globalExcludeDatesText.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            List<string> excludeDates = new List<string>(globalExcludeDates);
+
+            //Combine, remove duplicates and exclude dates for full list of test dates
+
+            List<string> testDates = new List<string>();
+            foreach (string _d in _testDates)
+            {
+                if (!(excludeDates.Contains(_d))) testDates.Add(_d);
+            }
+            
+
+            //Make a list for every param
+            string[] symbols = textBox2.Text.Split(',');
+            string[] startEndTimes = textBox3.Text.Split(',');
+            string[] incrementPrices = textBox4.Text.Split(',');
+            string[] incrementSizes = textBox5.Text.Split(',');
+            string[] autoBalances = textBox6.Text.Split(',');
+            string[] hardStops = textBox7.Text.Split(',');
+
+            //Add every combo to symbol test params
+
+            foreach (string symbol in symbols)
+            {
+                backtestSymbolDates.Add(symbol, testDates);
+            }
+
+            for (int s = 0; s < symbols.Length; s++) { 
+            for (int a = 0; a < startEndTimes.Length; a++)
+            {
+                for (int b = 0; b < incrementPrices.Length; b++)
+                {
+                    for (int c = 0; c < incrementSizes.Length; c++)
+                    {
+                        for (int d = 0; d < autoBalances.Length; d++)
+                        {
+                            for (int f = 0; f < hardStops.Length; f++)
+                            {
+                                backtestSymbolParams.Add(new List<string> { symbols[s], startEndTimes[a].Split('-')[0], startEndTimes[a].Split('-')[1], incrementPrices[b],
+                                    incrementSizes[c], autoBalances[d], hardStops[f] });
+                            }
+                        }
+                    }
+                }
+            }
+            }
+
+            numScenarios = backtestSymbolParams.Count;
+
+            backgroundWorker1.RunWorkerAsync();
+
+            
+        }
+
+        private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Backtest backtest = new Backtest(backtestSymbolParams, backtestSymbolDates, sender as BackgroundWorker);
+
+            TestResult testResult = new TestResult();
+
+            testResult = backtest.Run();
+
+
+            Backtest secondPassBacktest = new Backtest(testResult, backtestSymbolDates, sender as BackgroundWorker);
+
+
+
+            e.Result = testResult;
         }
     }
 }

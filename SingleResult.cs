@@ -13,6 +13,7 @@ namespace Backtester
         public decimal FinalPrint;
         public int BuyFills;
         public int SellFills;
+        public int CompleteFills;
         public int Position;
 
         //ToDo
@@ -30,5 +31,18 @@ namespace Backtester
 
         public decimal HighPrint;
         public decimal LowPrint;
+
+        public decimal startHighDiff;
+        public decimal startLowDiff;
+        public decimal startCloseDiff;
+
+        public void Calculate()
+        {
+            startHighDiff = HighPrint - StartingPrice;  //always positive
+            startLowDiff = LowPrint - StartingPrice;  //always negative
+            startCloseDiff = FinalPrint - StartingPrice;  //positive for gain, negative for loss
+            CompleteFills = Math.Min(BuyFills, SellFills);
+        }
+
     }
 }

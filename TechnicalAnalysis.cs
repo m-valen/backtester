@@ -7,8 +7,18 @@ namespace Backtester
 {
     class TechnicalAnalysis
     {
-        public static decimal TradingRange(string symbol, string date, int startMs, int endMs)
+        public static List<decimal> TradingRange(string symbol, string date, int startMs, int endMs)
         {
+            List<decimal> result = new List<decimal>();
+
+            List<int> acceptableTradeConditions = new List<int> { 0, 1, 9, 11, 51, 62, 66, 95, 115 };
+
+            bool firstTick = true;
+
+            decimal startPrice = 0;
+            decimal endPrice = 0;
+            decimal lastValidTick = 0;
+
             decimal tradingRange = 0;
             decimal high = 0;
             int highMs = 0;
@@ -31,7 +41,7 @@ namespace Backtester
             {
                 foreach (List<string> tick in ticks)
                 {
-                    if (tick[0] == "*")
+                    if (tick[0] == "*")  //Exclude manually excluded ticks
                     {
                         continue;
                     }
@@ -47,7 +57,11 @@ namespace Backtester
                     {
                         priceChange = Math.Abs(tickPrice - previousPriceChangeTick);
                         if (priceChange >= Convert.ToDecimal(0.01))  //Valid price change 
-                        { 
+                        {
+                            if (!(acceptableTradeConditions.Contains(Convert.ToInt32(tick[4]))))
+                            {
+                                continue;   //Don't process trade condition
+                            }
                             if (recentPriceChanges.Count < 10) //Count first 10 price changes as valid
                             {
                                 recentPriceChanges.Add(priceChange);
@@ -74,6 +88,11 @@ namespace Backtester
                     
                     if (tickMs >= startMs && tickMs <= endMs)
                     {
+                        if (firstTick)
+                        {
+                            startPrice = tickPrice;
+                            firstTick = false;
+                        }
                         if (tickPrice > high)
                         {
                             high = tickPrice;
@@ -84,9 +103,12 @@ namespace Backtester
                             low = tickPrice;
                             lowMs = tickMs;
                         }
+                        lastValidTick = tickPrice;
                     }
                     previousTickPrice = tickPrice;
                 }
+
+                endPrice = lastValidTick;
 
                 tradingRange = high - low;
                 Console.WriteLine("High: " + high + " - " + highMs + "..." + "Low : " + low + " - " + lowMs);
@@ -97,7 +119,12 @@ namespace Backtester
                 Console.WriteLine("Failed to retrieve ticks for - Symbol: " + symbol + ", Date: " + date);
             }
 
-            return tradingRange;
+            result.Add(startPrice);
+            result.Add(endPrice);
+            result.Add(high);
+            result.Add(low);
+
+            return result;
         }
 
         public static decimal ATR(List<List<string>> candles)
@@ -171,6 +198,23 @@ namespace Backtester
             }
             decimal averageRange = sum / _list.Count;
             return averageRange;
+        }
+
+        public static decimal Median(List<decimal> _list)
+        {
+            if (_list.Count == 0)
+            {
+                return 0;
+            }
+
+            _list.Sort();
+
+            int count = _list.Count;
+
+            int medianIndex = count / 2;
+
+            decimal median = _list[medianIndex];
+            return median;
         }
     }
 }

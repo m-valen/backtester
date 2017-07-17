@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
+
+
 using Microsoft.Office.Interop.Excel;
 
 namespace Backtester
@@ -17,6 +19,8 @@ namespace Backtester
         public TestResult testResult = new TestResult();
         public Dictionary<string, int> optimizeShow = new Dictionary<string, int>();
         public int resultsToShow = 0;
+
+        public List<string> displayGroups = new List<string>();
 
         public BackgroundWorker bw = new BackgroundWorker();
 
@@ -33,10 +37,11 @@ namespace Backtester
            
         }
 
-        public void PrepareReport(TestResult _testResult, Dictionary<string, int> _optimizeShow, BackgroundWorker _bw)
+        public void PrepareReport(TestResult _testResult, Dictionary<string, int> _optimizeShow, List<string> _displayGroups, BackgroundWorker _bw)
         {
             testResult = _testResult;
             optimizeShow = _optimizeShow;
+            displayGroups = _displayGroups;
             bw = _bw;
 
             //Sort results 
@@ -46,7 +51,7 @@ namespace Backtester
                 testResult.SymbolResults.Reverse();  //Sort descending
                 resultsToShow = optimizeShow["TotalPL"];
             }
-            else
+            else if (optimizeShow.ContainsKey("ProfitMargin"))
             {
                 testResult.SymbolResults.Sort(delegate (SymbolResult x, SymbolResult y)
                 {
@@ -55,6 +60,17 @@ namespace Backtester
 
                 testResult.SymbolResults.Reverse();
                 resultsToShow = optimizeShow["ProfitMargin"];
+            }
+
+            else
+            {
+                testResult.SymbolResults.Sort(delegate (SymbolResult x, SymbolResult y)
+                {
+                    return x.varianceStopCappedNormalized.CompareTo(y.varianceStopCappedNormalized);
+                });
+
+                //testResult.SymbolResults.Reverse();
+                resultsToShow = optimizeShow["VarianceNormalized"];
             }
 
             textReport += "Test for " + testResult.SymbolResults.Count + " scenarios, between " + testResult.startDate.ToString("yyyy-MM-dd") + " and "
@@ -164,6 +180,7 @@ namespace Backtester
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             xlApp = new Microsoft.Office.Interop.Excel.Application();
+
             wb = xlApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
 
             Worksheet ws = (Worksheet)wb.Worksheets.Add();
@@ -179,61 +196,187 @@ namespace Backtester
             saveFileDialog2.Filter = "Excel |*.xlsx";
 
 
+            int _symbolSheetRowCount = 0;
+            int _symbolSheetColCount = 0;
+            int _dailySheetRowCount = 0;
+            int _dailySheetColCount = 0;
+
+            /*
+            if (displayGroups.Contains("Position-BP"))
+            {
+                _dailySheetColCount += 4;
+                _symbolSheetColCount += 1;
+            }
+            if (displayGroups.Contains("Fills"))
+            {
+                _dailySheetColCount += 2;
+                _symbolSheetColCount += 4;
+            }
+            if (displayGroups.Contains("PL"))
+            {
+                _dailySheetColCount += 6;
+                _symbolSheetColCount += 11;
+            }
+            if (displayGroups.Contains("Range"))
+            {
+                _dailySheetColCount += 7;
+                _symbolSheetColCount += 7;
+            }
+
+            _symbolSheetRowCount = testResult.SymbolResults.Count + 1;
+            _dailySheetRowCount = (testResult.SymbolResults[0].SingleResults.Count * testResult.SymbolResults.Count) + 1;
+
+            int ssrc = _symbolSheetRowCount;
+            int sscc = _symbolSheetColCount;
+
+            int dsrc = _dailySheetRowCount;
+            int dscc = _dailySheetColCount;
+            */
+
+            List<List<object>> symbolSheetList = new List<List<object>>();
+            List<List<object>> dailySheetList = new List<List<object>>();
+
+            //object[,] symbolSheetArray = new object[ssrc, _symbolSheetColCount] { };
+            //object[,] dailySheetArray = new object[,] { };
+
+            int wsColumn = 0;
 
 
 
             //cell format: [row, column]
+            dailySheetList.Add(new List<object>());
 
-            ws.Cells[1, 1] = "Symbol";
-            ws.Cells[1, 2] = "Scenario";
-            ws.Cells[1, 3] = "Date";
-            ws.Cells[1, 4] = "Max Long";
-            ws.Cells[1, 5] = "Max Short";
-            ws.Cells[1, 6] = "Buying Power";
-            ws.Cells[1, 7] = "Buy Fills";
-            ws.Cells[1, 8] = "Sell Fills";
-            ws.Cells[1, 9] = "Start Price";
-            ws.Cells[1, 10] = "Final Price";
-            ws.Cells[1, 11] = "Final Position";
-            ws.Cells[1, 12] = "Increment PL";
-            ws.Cells[1, 13] = "Price Move PL";
-            ws.Cells[1, 14] = "Total PL";
-            ws.Cells[1, 15] = "Max Unrealized";
-            ws.Cells[1, 16] = "Min Unrealized";
-            ws.Cells[1, 17] = "Stop Time";
+            dailySheetList[0].Add("Symbol"); wsColumn++;
+            dailySheetList[0].Add("Scenario"); wsColumn++;
+            dailySheetList[0].Add("Date"); wsColumn++;
 
 
+            if (displayGroups.Contains("Position-BP")) {
+                dailySheetList[0].Add("Buying Power"); wsColumn++;
+                dailySheetList[0].Add("Max Long"); wsColumn++;
+                dailySheetList[0].Add("Max Short"); wsColumn++;
+                dailySheetList[0].Add("Final Position"); wsColumn++;
+            }
+            
+            if (displayGroups.Contains("Fills"))
+            {
+                dailySheetList[0].Add("Buy Fills"); wsColumn++;
+                dailySheetList[0].Add("Sell Fills"); wsColumn++;
+                dailySheetList[0].Add("Complete Fills"); wsColumn++;
+            }
 
-            symbolSheet.Cells[1, 1] = "Symbol";
-            symbolSheet.Cells[1, 2] = "Scenario";
-            symbolSheet.Cells[1, 3] = "Buying Power";
-            symbolSheet.Cells[1, 4] = "Buy Fills";
-            symbolSheet.Cells[1, 5] = "Sell Fills";
-            symbolSheet.Cells[1, 6] = "Increment PL";
-            symbolSheet.Cells[1, 7] = "Price Move PL";
-            symbolSheet.Cells[1, 8] = "Total PL";
-            symbolSheet.Cells[1, 9] = "Profit Margin (%)";
-            symbolSheet.Cells[1, 10] = "Avg Max Unrealized";
-            symbolSheet.Cells[1, 11] = "Avg Min Unrealized";
-            symbolSheet.Cells[1, 12] = "# Of Wins";
-            symbolSheet.Cells[1, 13] = "Avg Win";
-            symbolSheet.Cells[1, 14] = "# Of Losses";
-            symbolSheet.Cells[1, 15] = "Avg Loss";
+            if (displayGroups.Contains("PL"))
+            {
+                dailySheetList[0].Add("Increment PL"); wsColumn++;
+                dailySheetList[0].Add("Price Move PL"); wsColumn++;
+                dailySheetList[0].Add("Total PL"); wsColumn++;
+                dailySheetList[0].Add("Max Unrealized"); wsColumn++;
+                dailySheetList[0].Add("Min Unrealized"); wsColumn++;
+                dailySheetList[0].Add("Stop Time"); wsColumn++;
+            }
+            
 
+            if (displayGroups.Contains("Range"))
+            {
+                dailySheetList[0].Add("Start Price"); wsColumn++;
+                dailySheetList[0].Add("Final Price"); wsColumn++;
+                dailySheetList[0].Add("High"); wsColumn++;
+                dailySheetList[0].Add("Low"); wsColumn++;
+                dailySheetList[0].Add("Start High Diff"); wsColumn++;
+                dailySheetList[0].Add("Start Low Diff"); wsColumn++;
+                dailySheetList[0].Add("Start Close Diff"); wsColumn++;
+            }
+
+            int symbolSheetColumn = 0;
+
+            symbolSheetList.Add(new List<object>());
+
+            symbolSheetList[0].Add("Symbol"); symbolSheetColumn++;
+            symbolSheetList[0].Add("Scenario"); symbolSheetColumn++;
+
+            if (displayGroups.Contains("Position-BP"))
+            {
+                symbolSheetList[0].Add("Buying Power"); symbolSheetColumn++;
+            }
+
+            if (displayGroups.Contains("Fills"))
+            {
+                symbolSheetList[0].Add("Buy Fills"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Avg Buy Fills"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Sell Fills"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Avg Sell Fills"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Complete Fills"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Avg Complete Fills"); symbolSheetColumn++;
+            }
+
+            if (displayGroups.Contains("PL"))
+            {
+                symbolSheetList[0].Add("Increment PL"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Price Move PL"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Total PL"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Profit Margin (%)"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Avg Max Unrealized"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Avg Min Unrealized"); symbolSheetColumn++;
+                symbolSheetList[0].Add("# of Wins"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Avg Win"); symbolSheetColumn++;
+                symbolSheetList[0].Add("# of Losses"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Avg Loss"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Yield"); symbolSheetColumn++;
+            }
+            if (displayGroups.Contains("AvgWin-Analysis"))
+            {
+                symbolSheetList[0].Add("Highest Max Unrealized"); wsColumn++;
+                symbolSheetList[0].Add("Days Above Average Win"); wsColumn++;
+                symbolSheetList[0].Add("Days Gave Back Average Win"); wsColumn++;
+                symbolSheetList[0].Add("Median Max Unrealized"); wsColumn++;
+                symbolSheetList[0].Add("Median Win"); wsColumn++;
+                
+            }
+            if (displayGroups.Contains("Range"))
+            {
+                symbolSheetList[0].Add("Step Fill Ratio"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Median Step Fill Ratio"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Mean Variance"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Median Variance"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Median Variance Stop Capped"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Mean Variance Normalized"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Median Variance Normalized"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Median Variance Stop Capped Normalized"); symbolSheetColumn++;
+                //symbolSheetList[0].Add("Variance Squares Normalized"); symbolSheetColumn++;
+                //symbolSheetList[0].Add("Variance Squares"); symbolSheetColumn++;
+                //symbolSheetList[0].Add("Average High Diff"); symbolSheetColumn++;
+                //symbolSheetList[0].Add("Greatest High Diff"); symbolSheetColumn++;
+                //symbolSheetList[0].Add("Average Low Diff"); symbolSheetColumn++;
+                //symbolSheetList[0].Add("Greatest Low Diff"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Average Max Diff"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Median Max Diff"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Average Close Diff"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Greatest Close Diff"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Average Max Range Steps"); symbolSheetColumn++;
+                symbolSheetList[0].Add("Median Max Range Steps"); symbolSheetColumn++;
+                symbolSheetList[0].Add("# Stops - 4 increments"); symbolSheetColumn++;
+                symbolSheetList[0].Add("# Stops - 5 increments"); symbolSheetColumn++;
+                symbolSheetList[0].Add("# Stops - 6 increments"); symbolSheetColumn++;
+                symbolSheetList[0].Add("# Stops - 7 increments"); symbolSheetColumn++;
+
+            }
+            
+
+            symbolSheetColumn++;
 
 
             //symbolParamSheet.Cells[1, 1] = "Symbol";
-            symbolSheet.Cells[1, 17] = "Start Time";
-            symbolSheet.Cells[1, 18] = "End Time";
-            symbolSheet.Cells[1, 19] = "Increment Price";
-            symbolSheet.Cells[1, 20] = "Increment Size";
-            symbolSheet.Cells[1, 21] = "Autobalance";
-            symbolSheet.Cells[1, 22] = "Hard Stop PL";
+            symbolSheetList[0].Add("Start Time"); symbolSheetColumn++;
+            symbolSheetList[0].Add("End Time"); symbolSheetColumn++;
+            symbolSheetList[0].Add("Increment Price"); symbolSheetColumn++;
+            symbolSheetList[0].Add("Increment Size"); symbolSheetColumn++;
+            symbolSheetList[0].Add("Autobalance"); symbolSheetColumn++;
+            symbolSheetList[0].Add("Hard Stop PL"); symbolSheetColumn++;
 
 
 
-            int symbolRow = 2;
-            int dailyRow = 2;
+            int symbolRow = 1;
+            int dailyRow = 1;
 
             int scenarioCount = 1;
 
@@ -241,6 +384,8 @@ namespace Backtester
             int denominator;
             if (totalResults < resultsToShow) denominator = totalResults;
             else denominator = resultsToShow;
+
+            
 
             foreach (SymbolResult symbolResult in testResult.SymbolResults)
             {
@@ -258,67 +403,202 @@ namespace Backtester
                 {
                     backgroundWorker1.ReportProgress(scenarioCount, denominator);
 
+                    symbolSheetList.Add(new List<object>());
+
+                    symbolSheetColumn = 0;
+
+
+
+                    symbolSheetList[symbolRow].Add(symbolResult.Symbol); symbolSheetColumn++;
+                    symbolSheetList[symbolRow].Add(symbolResult.scenarioNum); symbolSheetColumn++;
+
+                    if (displayGroups.Contains("Position-BP"))
+                    {
+                        symbolSheetList[symbolRow].Add(symbolResult.BuyingPower); symbolSheetColumn++;
+                    }
+
+                    if (displayGroups.Contains("Fills"))
+                    {
+                        symbolSheetList[symbolRow].Add(symbolResult.BuyFills); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.averageBuyFills); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.SellFills); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.averageSellFills); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.CompleteFills); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.averageCompleteFills); symbolSheetColumn++;
+                    }
+
+                    if (displayGroups.Contains("PL"))
+                    {
+                        symbolSheetList[symbolRow].Add(symbolResult.IncrementPL); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.PriceMovePL); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.TotalPL); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.ProfitMargin); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.AvgMaxUnrealized); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.AvgMinUnrealized); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.NumWins); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.AvgWin); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.NumLosses); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.AvgLoss); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.yield); symbolSheetColumn++;
+                    }
+                    if (displayGroups.Contains("AvgWin-Analysis"))
+                    {
+                        symbolSheetList[symbolRow].Add(symbolResult.highestMaxUnrealized); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.daysAboveAverageWin); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.daysGaveBackAverageWin); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.medianMaxUnrealized); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.medianWin); symbolSheetColumn++;
+                    }
+                    if (displayGroups.Contains("Range"))
+                    {
+                        symbolSheetList[symbolRow].Add(symbolResult.stepFillRatio); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.medianStepFillRatio); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.variance); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.medianVariance); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.varianceStopCapped); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.varianceNormalized); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.medianVarianceNormalized); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.varianceStopCappedNormalized); symbolSheetColumn++;
+                        //symbolSheetList[symbolRow].Add(symbolResult.varianceSquaresNormalized); symbolSheetColumn++;
+                        //symbolSheetList[symbolRow].Add(symbolResult.varianceSquares); symbolSheetColumn++;
+                        //symbolSheetList[symbolRow].Add(symbolResult.averageStartHighDiff); symbolSheetColumn++;
+                        //symbolSheetList[symbolRow].Add(symbolResult.greatestHighDiff); symbolSheetColumn++;
+                        //symbolSheetList[symbolRow].Add(symbolResult.averageStartLowDiff); symbolSheetColumn++;
+                        //symbolSheetList[symbolRow].Add(symbolResult.greatestLowDiff); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.averageMaxDiff); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.medianMaxDiff); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.averageStartCloseDiff); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.greatestCloseDiff); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.averageMaxRangeSteps); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.medianMaxRangeSteps); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.numPriceStops[0]); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.numPriceStops[1]); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.numPriceStops[2]); symbolSheetColumn++;
+                        symbolSheetList[symbolRow].Add(symbolResult.numPriceStops[3]); symbolSheetColumn++;
+                    }
                     
 
-                    symbolSheet.Cells[symbolRow, 1] = symbolResult.Symbol;
-                    symbolSheet.Cells[symbolRow, 2] = symbolResult.scenarioNum;
-                    symbolSheet.Cells[symbolRow, 3] = symbolResult.BuyingPower;
-                    symbolSheet.Cells[symbolRow, 4] = symbolResult.BuyFills;
-                    symbolSheet.Cells[symbolRow, 5] = symbolResult.SellFills;
-                    symbolSheet.Cells[symbolRow, 6] = symbolResult.IncrementPL;
-                    symbolSheet.Cells[symbolRow, 7] = symbolResult.PriceMovePL;
-                    symbolSheet.Cells[symbolRow, 8] = symbolResult.TotalPL;
-                    symbolSheet.Cells[symbolRow, 9] = symbolResult.ProfitMargin;
-                    symbolSheet.Cells[symbolRow, 10] = symbolResult.AvgMaxUnrealized;
-                    symbolSheet.Cells[symbolRow, 11] = symbolResult.AvgMinUnrealized;
-                    symbolSheet.Cells[symbolRow, 12] = symbolResult.NumWins;
-                    symbolSheet.Cells[symbolRow, 13] = symbolResult.AvgWin;
-                    symbolSheet.Cells[symbolRow, 14] = symbolResult.NumLosses;
-                    symbolSheet.Cells[symbolRow, 15] = symbolResult.AvgLoss;
+                    symbolSheetColumn++;
 
-                    symbolSheet.Cells[symbolRow, 17] = symbolResult.StartTime;
-                    symbolSheet.Cells[symbolRow, 18] = symbolResult.EndTime;
-                    symbolSheet.Cells[symbolRow, 19] = symbolResult.IncrementPrice;
-                    symbolSheet.Cells[symbolRow, 20] = symbolResult.IncrementSize;
-                    symbolSheet.Cells[symbolRow, 21] = symbolResult.Autobalance;
-                    symbolSheet.Cells[symbolRow, 22] = symbolResult.HardStop;
+                    symbolSheetList[symbolRow].Add(symbolResult.StartTime); symbolSheetColumn++;
+                    symbolSheetList[symbolRow].Add(symbolResult.EndTime); symbolSheetColumn++;
+                    symbolSheetList[symbolRow].Add(symbolResult.IncrementPrice); symbolSheetColumn++;
+                    symbolSheetList[symbolRow].Add(symbolResult.IncrementSize); symbolSheetColumn++;
+                    symbolSheetList[symbolRow].Add(symbolResult.Autobalance); symbolSheetColumn++;
+                    symbolSheetList[symbolRow].Add(symbolResult.HardStop); symbolSheetColumn++;
 
 
 
                     foreach (SingleResult sr in symbolResult.SingleResults)
                     {
-                        ws.Cells[dailyRow, 1] = symbolResult.Symbol;
-                        ws.Cells[dailyRow, 2] = symbolResult.scenarioNum;
-                        ws.Cells[dailyRow, 3] = sr.Date;
-                        ws.Cells[dailyRow, 4] = sr.MaxLong;
-                        ws.Cells[dailyRow, 5] = sr.MaxShort;
-                        ws.Cells[dailyRow, 6] = sr.MaxBuyingPower;
-                        ws.Cells[dailyRow, 7] = sr.BuyFills;
-                        ws.Cells[dailyRow, 8] = sr.SellFills;
-                        ws.Cells[dailyRow, 9] = sr.StartingPrice;
-                        ws.Cells[dailyRow, 10] = sr.FinalPrint;
-                        ws.Cells[dailyRow, 11] = sr.Position;
-                        ws.Cells[dailyRow, 12] = sr.IncrementPL;
-                        ws.Cells[dailyRow, 13] = sr.PriceMovePL;
-                        ws.Cells[dailyRow, 14] = sr.TotalPL;
-                        ws.Cells[dailyRow, 15] = sr.maxUnrealized;
-                        ws.Cells[dailyRow, 16] = sr.minUnrealized;
-                        ws.Cells[dailyRow, 17] = sr.StopTime;
+                        wsColumn = 0;
 
+                        dailySheetList.Add(new List<object>());
+
+                        dailySheetList[dailyRow].Add(symbolResult.Symbol); wsColumn++;
+                        dailySheetList[dailyRow].Add(symbolResult.scenarioNum); wsColumn++;
+                        dailySheetList[dailyRow].Add(sr.Date); wsColumn++;
+
+                        
+                        if (displayGroups.Contains("Position-BP"))
+                        {
+                            dailySheetList[dailyRow].Add(sr.MaxBuyingPower); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.MaxLong); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.MaxShort); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.Position); wsColumn++;
+                        }
+
+                        if (displayGroups.Contains("Fills"))
+                        {
+                            dailySheetList[dailyRow].Add(sr.BuyFills); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.SellFills); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.CompleteFills); wsColumn++;
+                        }
+
+                        if (displayGroups.Contains("PL"))
+                        {
+                            dailySheetList[dailyRow].Add(sr.IncrementPL); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.PriceMovePL); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.TotalPL); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.maxUnrealized); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.minUnrealized); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.StopTime); wsColumn++;
+                        }
+
+                        if (displayGroups.Contains("Range"))
+                        {
+                            dailySheetList[dailyRow].Add(sr.StartingPrice); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.FinalPrint); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.HighPrint); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.LowPrint); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.startHighDiff); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.startLowDiff); wsColumn++;
+                            dailySheetList[dailyRow].Add(sr.startCloseDiff); wsColumn++;
+                        }
+                        
                         dailyRow++;
                     }
 
+                    
                     symbolRow++;
                     scenarioCount++;
                 }
             }
 
-            ws.Range["G2", "N" + dailyRow].NumberFormat = "#.00";
-            symbolSheet.Range["E2", "N" + symbolRow].NumberFormat = "#.00";
+            var symbolSheetArray = new object[symbolSheetList.Count, symbolSheetList[0].Count];
+            for (int i = 0; i < symbolSheetList.Count; i++)
+            {
+                for (int j = 0; j < symbolSheetList[i].Count; j++)
+                {
+                    if (symbolSheetList[i].Count != symbolSheetList[0].Count)
+                        throw new InvalidOperationException("The list cannot contain elements (lists) of different sizes.");
+                    symbolSheetArray[i, j] = symbolSheetList[i][j];
+                }
+            }
+
+            var dailySheetArray = new object[dailySheetList.Count, dailySheetList[0].Count];
+            for (int i = 0; i < dailySheetList.Count; i++)
+            {
+                for (int j = 0; j < dailySheetList[i].Count; j++)
+                {
+                    if (dailySheetList[i].Count != dailySheetList[0].Count)
+                        throw new InvalidOperationException("The list cannot contain elements (lists) of different sizes.");
+                    dailySheetArray[i, j] = dailySheetList[i][j];
+                }
+            }
+
+            //object[][] symbolSheetArray = symbolSheetList.Select(a => a.ToArray()).ToArray();
+            //object[][] dailySheetArray = dailySheetList.ToArray();
+
+            //int symbolSheetRowCount = symbolSheetArray.GetLength(0);
+            //int symbolSheetColCount = symbolSheetArray.GetLength(1);
+
+            //int dailySheetRowCount = dailySheetArray.GetLength(0);
+            //int dailySheetColCount = dailySheetArray.GetLength(1);
+
+            var symbolSheetStartCell = symbolSheet.Cells[1, 1];
+
+            int count1 = symbolSheetArray.GetLength(0);
+            int count2 = symbolSheetArray.GetLength(1);
+
+            var symbolSheetEndCell = symbolSheet.Cells[symbolSheetArray.GetLength(0), symbolSheetArray.GetLength(1)];
+            var writeRange = (Range)symbolSheet.Range[symbolSheetStartCell, symbolSheetEndCell];
+            writeRange.Value = symbolSheetArray;
+
+
+            var dailySheetStartCell = ws.Cells[1, 1];
+            var dailySheetEndCell = ws.Cells[dailySheetArray.GetLength(0), dailySheetArray.GetLength(1)];
+            writeRange = (Range)ws.Range[dailySheetStartCell, dailySheetEndCell];
+            writeRange.Value = dailySheetArray;
+
+
+            ws.Range["G2", "S" + dailyRow].NumberFormat = "#.00";
+            symbolSheet.Range["E2", "S" + symbolRow].NumberFormat = "#.00";
 
 
             symbolSheet.Activate();
             symbolSheet.Application.ActiveWindow.SplitRow = 1;
+            symbolSheet.Application.ActiveWindow.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlNormal;
             symbolSheet.Application.ActiveWindow.FreezePanes = true;
 
             ws.Activate();
